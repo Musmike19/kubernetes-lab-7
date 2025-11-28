@@ -1,125 +1,15 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  annotations:
-    cni.projectcalico.org/containerID: 67af8eeeef9f9446df8eab5a0ca43729a0b81f9a0d3da300cbc36dd4b6cb267c
-    cni.projectcalico.org/podIP: 10.244.120.69/32
-    cni.projectcalico.org/podIPs: 10.244.120.69/32
-  creationTimestamp: "2025-11-28T21:51:17Z"
-  generation: 1
-  labels:
-    run: testpod
   name: testpod
   namespace: default
-  resourceVersion: "3110"
-  uid: faf40ffe-6a49-4f21-988f-df150c3bbbca
+  labels:
+    run: testpod
 spec:
   containers:
-  - args:
-    - sleep
-    - infinity
+  - name: testpod
     image: busybox
     imagePullPolicy: Always
-    name: testpod
-    resources: {}
-    terminationMessagePath: /dev/termination-log
-    terminationMessagePolicy: File
-    volumeMounts:
-    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-      name: kube-api-access-hmtbh
-      readOnly: true
-  dnsPolicy: ClusterFirst
-  enableServiceLinks: true
-  nodeName: minikube
-  preemptionPolicy: PreemptLowerPriority
-  priority: 0
-  restartPolicy: Always
-  schedulerName: default-scheduler
-  securityContext: {}
-  serviceAccount: default
-  serviceAccountName: default
-  terminationGracePeriodSeconds: 30
-  tolerations:
-  - effect: NoExecute
-    key: node.kubernetes.io/not-ready
-    operator: Exists
-    tolerationSeconds: 300
-  - effect: NoExecute
-    key: node.kubernetes.io/unreachable
-    operator: Exists
-    tolerationSeconds: 300
-  volumes:
-  - name: kube-api-access-hmtbh
-    projected:
-      defaultMode: 420
-      sources:
-      - serviceAccountToken:
-          expirationSeconds: 3607
-          path: token
-      - configMap:
-          items:
-          - key: ca.crt
-            path: ca.crt
-          name: kube-root-ca.crt
-      - downwardAPI:
-          items:
-          - fieldRef:
-              apiVersion: v1
-              fieldPath: metadata.namespace
-            path: namespace
-status:
-  conditions:
-  - lastProbeTime: null
-    lastTransitionTime: "2025-11-28T21:51:24Z"
-    observedGeneration: 1
-    status: "True"
-    type: PodReadyToStartContainers
-  - lastProbeTime: null
-    lastTransitionTime: "2025-11-28T21:51:17Z"
-    observedGeneration: 1
-    status: "True"
-    type: Initialized
-  - lastProbeTime: null
-    lastTransitionTime: "2025-11-28T21:51:24Z"
-    observedGeneration: 1
-    status: "True"
-    type: Ready
-  - lastProbeTime: null
-    lastTransitionTime: "2025-11-28T21:51:24Z"
-    observedGeneration: 1
-    status: "True"
-    type: ContainersReady
-  - lastProbeTime: null
-    lastTransitionTime: "2025-11-28T21:51:17Z"
-    observedGeneration: 1
-    status: "True"
-    type: PodScheduled
-  containerStatuses:
-  - containerID: docker://ce53695131ba378fa8cda86cf518266eaffd61d8c7745a67e84ab09652ad3215
-    image: busybox:latest
-    imageID: docker-pullable://busybox@sha256:e3652a00a2fabd16ce889f0aa32c38eec347b997e73bd09e69c962ec7f8732ee
-    lastState: {}
-    name: testpod
-    ready: true
-    resources: {}
-    restartCount: 0
-    started: true
-    state:
-      running:
-        startedAt: "2025-11-28T21:51:23Z"
-    volumeMounts:
-    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-      name: kube-api-access-hmtbh
-      readOnly: true
-      recursiveReadOnly: Disabled
-  hostIP: 192.168.49.2
-  hostIPs:
-  - ip: 192.168.49.2
-  observedGeneration: 1
-  phase: Running
-  podIP: 10.244.120.69
-  podIPs:
-  - ip: 10.244.120.69
-  qosClass: BestEffort
-  startTime: "2025-11-28T21:51:17Z"
-
+    args:
+    - sleep
+    - infinity
